@@ -30,7 +30,7 @@ const ClienteList = () => {
         .filter(cliente => cliente.nome.toLowerCase().includes(filtro.toLowerCase()))
         .map(cliente => (
           <li key={cliente.id}>
-            {cliente.nome} - {cliente.email} - {cliente.telefone}
+            {cliente.nome} - {cliente.email} - {cliente.telefone} - X: {cliente.coordenada_x}, Y: {cliente.coordenada_y}
           </li>
         ))}
     </ul>

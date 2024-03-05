@@ -11,6 +11,22 @@ const ClienteForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     // Lógica para enviar os dados do formulário para a API
+    fetch('http://localhost:3000/api/clientes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        nome,
+        email,
+        telefone,
+        coordenada_x: coordenadaX,
+        coordenada_y: coordenadaY,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => console.log('Cliente cadastrado:', data))
+      .catch(error => console.error('Erro ao cadastrar cliente:', error));
   };
 
   return (
