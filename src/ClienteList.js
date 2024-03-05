@@ -1,13 +1,17 @@
 // ClienteList.js
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './api/config'; // Substitua pelo caminho correto
 
 const ClienteList = () => {
   const [clientes, setClientes] = useState([]);
   const [filtro, setFiltro] = useState('');
 
-
   useEffect(() => {
     // Lógica para buscar clientes na API e definir o estado "clientes"
+    fetch(`${API_BASE_URL}/clientes`)
+      .then(response => response.json())
+      .then(data => setClientes(data))
+      .catch(error => console.error('Erro ao buscar clientes:', error));
   }, []);
 
   return (
