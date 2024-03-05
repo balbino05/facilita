@@ -5,6 +5,8 @@ import API_BASE_URL from './api/config'; // Substitua pelo caminho correto
 const ClienteList = () => {
   const [clientes, setClientes] = useState([]);
   const [filtro, setFiltro] = useState('');
+  const [rotaOtimizada, setRotaOtimizada] = useState([]);
+  const [modalAberta, setModalAberta] = useState(false);
 
   useEffect(() => {
     // Lógica para buscar clientes na API e definir o estado "clientes"
@@ -13,6 +15,16 @@ const ClienteList = () => {
       .then(data => setClientes(data))
       .catch(error => console.error('Erro ao buscar clientes:', error));
   }, []);
+
+  const calcularRotaOtimizada = () => {
+    fetch(`${API_BASE_URL}/rota-otimizada`)
+      .then(response => response.json())
+      .then(data => {
+        setRotaOtimizada(data);
+        setModalAberta(true);
+      })
+      .catch(error => console.error('Erro ao calcular rota otimizada:', error));
+  };
 
   return (
     <div>
@@ -34,6 +46,21 @@ const ClienteList = () => {
           </li>
         ))}
     </ul>
+    <button onClick={calcularRotaOtimizada}>Calcular Rota Otimizada</button>
+          {/* Modal para exibir a rota otimizada */}
+          {modalAberta && (
+        <div className="modal">
+          <button onClick={() => setModalAberta(false)}>Fechar Modal</button>
+          <h3>Rota Otimizada</h3>
+          <ul>
+            {rotaOtimizada.map(cliente => (
+              <li key={cliente.id}>
+                X: {cliente.coordenada_x}, Y: {cliente.coordenada_y}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
   </div>
   );
 };
