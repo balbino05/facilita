@@ -1,6 +1,21 @@
 // ClienteList.js
 import React, { useState, useEffect } from 'react';
 import API_BASE_URL from './api/config'; // Substitua pelo caminho correto
+import {Row, Col } from 'react-bootstrap';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {  Button } from '@mui/material';
+
+// Define um tema personalizado do Material Design
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2', // Cor principal para botões e elementos de destaque
+    },
+    secondary: {
+      main: '#4d4949', // Cor secundária para botões de ação secundária
+    },
+  },
+});
 
 const ClienteList = () => {
   const [clientes, setClientes] = useState([]);
@@ -27,8 +42,9 @@ const ClienteList = () => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <div>
-    <h2>Lista de Clientes</h2>
+    <h1>Lista de Clientes</h1>
     <label>
       Filtrar por nome:
       <input
@@ -37,20 +53,27 @@ const ClienteList = () => {
         onChange={e => setFiltro(e.target.value)}
       />
     </label>
-    <ul>
+    <Row>
       {clientes
         .filter(cliente => cliente.nome.toLowerCase().includes(filtro.toLowerCase()))
         .map(cliente => (
-          <li key={cliente.id}>
-            {cliente.nome} - {cliente.email} - {cliente.telefone} - X: {cliente.coordenada_x}, Y: {cliente.coordenada_y}
-          </li>
+          <Col key={cliente.id} xs={12} md={6} lg={4}>
+            <div className="cliente-card">
+              <h2>Nome: {cliente.nome}</h2>
+              <p>Email: {cliente.email}</p>
+              <p>Telefone: {cliente.telefone}</p>
+              <p>Coordenada X: {cliente.coordenada_x}</p>
+              <p>Coordenada Y: {cliente.coordenada_y}</p>
+              {/* Adicionar mais informações, como coordenadas, se necessário */}
+            </div>
+          </Col>
         ))}
-    </ul>
-    <button onClick={calcularRotaOtimizada}>Calcular Rota Otimizada</button>
+    </Row>
+    <Button variant="primary" onClick={calcularRotaOtimizada}>Calcular Rota Otimizada</Button>
           {/* Modal para exibir a rota otimizada */}
           {modalAberta && (
         <div className="modal">
-          <button onClick={() => setModalAberta(false)}>Fechar Modal</button>
+          <Button onClick={() => setModalAberta(false)}>Fechar Modal</Button>
           <h3>Rota Otimizada</h3>
           <ul>
             {rotaOtimizada.map(cliente => (
@@ -62,6 +85,7 @@ const ClienteList = () => {
         </div>
       )}
   </div>
+  </ThemeProvider>
   );
 };
 

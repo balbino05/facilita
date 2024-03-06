@@ -3,9 +3,10 @@ import React from 'react';
 import ClienteList from './ClienteList';
 import ClienteForm from './ClienteForm';
 
+
 const App = () => {
   return (
-    <div>
+    <div class='div '>
       <ClienteList />
       <ClienteForm />
     </div>

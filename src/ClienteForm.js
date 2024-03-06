@@ -1,5 +1,20 @@
 // ClienteForm.js
 import React, { useState } from 'react';
+import { Form} from 'react-bootstrap';
+import { TextField, Container, Button } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+import { Col } from 'react-bootstrap';
+// Define um tema personalizado do Material Design
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2', // Cor principal para botões e elementos de destaque
+    },
+    secondary: {
+      main: '#f50057', // Cor secundária para botões de ação secundária
+    },
+  },
+});
 
 const ClienteForm = () => {
   const [nome, setNome] = useState('');
@@ -31,30 +46,34 @@ const ClienteForm = () => {
 
   return (
     <div>
-      <h2>Formulário de Cadastro de Cliente</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Nome:
-          <input type="text" value={nome} onChange={e => setNome(e.target.value)} />
-        </label>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-        </label>
-        <label>
-          Telefone:
-          <input type="text" value={telefone} onChange={e => setTelefone(e.target.value)} />
-        </label>
-        <label>
-          Coordenada X:
-          <input type="number" value={coordenadaX} onChange={e => setCoordenadaX(e.target.value)} />
-        </label>
-        <label>
-          Coordenada Y:
-          <input type="number" value={coordenadaY} onChange={e => setCoordenadaY(e.target.value)} />
-        </label>
-        <button type="submit">Cadastrar Cliente</button>
-      </form>
+      <h1>Cadastro de Cliente</h1>
+      <Form class="col-md-6 form">
+        <Col xs={12} md={6}>
+          <Form.Group controlId="formBasicNome" >
+            <Form.Label>Nome</Form.Label>
+            <TextField type="text" variant="outlined" />
+          </Form.Group>
+        </Col>
+
+        <Col xs={12} md={6}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <TextField type="email" variant="outlined" />
+          </Form.Group>
+        </Col>
+
+        <Col xs={12} md={6}>
+          <Form.Group controlId="formBasicTelefone">
+            <Form.Label>Telefone</Form.Label>
+            <TextField type="tel" variant="outlined" />
+          </Form.Group>
+        </Col>
+        {/* Adicionar campos para coordenadas X e Y, se necessário */}
+        
+        <Button variant="primary" type="submit">
+          Cadastrar Cliente
+        </Button>
+      </Form>
     </div>
   );
 };
