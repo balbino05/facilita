@@ -9,7 +9,7 @@ import {  Button } from '@mui/material';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1976d2', // Cor principal para botões e elementos de destaque
+      main: '#1976d2', // Cor principal para botões e elementos de destaqueG
     },
     secondary: {
       main: '#4d4949', // Cor secundária para botões de ação secundária
