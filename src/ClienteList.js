@@ -55,7 +55,7 @@ const ClienteList = () => {
           <ul>
             {rotaOtimizada.map(cliente => (
               <li key={cliente.id}>
-                X: {cliente.coordenada_x}, Y: {cliente.coordenada_y}
+                Nome: {cliente.nome} ,X: {cliente.coordenada_x}, Y: {cliente.coordenada_y}
               </li>
             ))}
           </ul>
